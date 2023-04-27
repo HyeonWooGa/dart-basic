@@ -1,8 +1,12 @@
 void main() {
-  String name = 'Park'; // 문자열
-  int age = 31; // 정수
-  double height = 167.8; // 실수
-  num weight = 69.3; // 정수, 실수
-  num weight2 = 69; // 정수, 실수
-  bool isMarried = false; // 논리
+  dynamic anything1;
+  var anything2;
+
+  anything1 = 'park';
+  anything1 = 31.02;
+  anything1 = true;
+
+  anything1 = 'lee';
+  anything1 = 30;
+  anything1 = true;
 }
