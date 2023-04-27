@@ -1,12 +1,27 @@
 void main() {
-  dynamic anything1;
-  var anything2;
+  late var anything; // dynamic
+  /*
+  print(anything);  // Error
+  */
+  anything = true;
+  print(anything); // OK
+  anything = 3;
 
-  anything1 = 'park';
-  anything1 = 31.02;
-  anything1 = true;
+  late String name; // String
+  /*
+  print(name);  // Error
+  */
+  name = 'park';
+  print(name); // OK
+  anything = 'lee';
 
-  anything1 = 'lee';
-  anything1 = 30;
-  anything1 = true;
+  late final double height;
+  /*
+  print(height); // Error
+  */
+  height = 167.8;
+  print(height); // OK
+  /*
+  height = 167.9; // Error
+  */
 }
