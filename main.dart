@@ -1,10 +1,11 @@
-// Cascade Notation
-//// Dart 에서 정말 쿨한 것 중의 하나
-//// 유용한 Syntax Sugar
+// Enum
+
+enum Team { Christians, NonChristians, Unknown }
 
 class Player {
   int xp;
-  String name, team;
+  String name;
+  Team team;
 
   Player({
     required this.name,
@@ -22,7 +23,7 @@ void main() {
   var park = Player(
     name: 'Park',
     xp: 0,
-    team: 'Christian',
+    team: Team.Christians,
   )
     ..name = 'PYW'
     ..xp = 100
