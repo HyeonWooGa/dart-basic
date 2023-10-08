@@ -1,41 +1,65 @@
-// Defining a Function
-//// 대부분 프로그래밍 언어의 함수와 같이
-//// 반환 자료형, 함수 이름, 매개변수 선언, 함수 내부 코드로 이루어져 있습니다.
+// Named Parameters
 
-//// 함수 내부 코드가 한 줄인 경우 Fat Arrow Function 을 사용할 수 있고
-//// 함수 내부 코드가 한 줄 이상인 경우 함수 선언식을 사용할 수 있습니다.
-
-void sayHello1(String name) {
-  print('How are you $name');
+//// Named Parameters 를 사용하지 않은 함수
+//// Main 함수에서 해당 함수 호출시,
+//// 각 파라미터의 역할이 명확히 명시되어 있지 않아서 헷갈릴 수 있음
+//// 매개변수의 순서들을 기억해야함.... 하드코딩 느낌...
+String sayHello1(
+  String personName,
+  String myName,
+  int myAge,
+  String myCountry,
+) {
+  return 'Hello $personName, I\'m $myName, $myAge and from $myCountry.';
 }
 
-String sayHello2(String name) {
-  return 'How are you $name';
+//// Named Parameters 를 사용한 함수
+//// 기존 매개변수 정의 방식에서 양 끝단을 중괄호로 감싸주기만 하면 완성이다.
+//// 매개변수의 순서들을 기억할 필요없고 변수명(목적)만 기억해 주면 된다. (직관적)
+
+//// 다만 Dart 의 NullSafety 로 인하여
+//// Main 단에서 각 매개변수의 값이 안 들어올 경우를 대비해야한다고 오류 발생
+//// 해결법으론 두가지가 있다.
+
+////// 1. 매개변수 초기값(default value)을 지정해주는 방법
+String sayHello2({
+  String personName = 'Anon',
+  String myName = 'Anon',
+  int myAge = 99,
+  String myCountry = 'Earth',
+}) {
+  return 'Hello $personName, I\'m $myName, $myAge and from $myCountry.';
 }
 
-String sayHello3(var name) {
-  // return 타입은 var 사용 불가
-  return 'How are you $name';
+////// 2. required modifier 사용
+////// 함수 호출시, 매개변수 값 전달을 강제해주는 방법
+String sayHello3({
+  required String personName,
+  required String myName,
+  required int myAge,
+  required String myCountry,
+}) {
+  return 'Hello $personName, I\'m $myName, $myAge and from $myCountry.';
 }
-
-void sayHello4(String name) => print('How are you $name');
-
-String sayHello5(String name) => 'How are you $name';
-
-num plus1(num a, num b) {
-  return a + b;
-}
-
-num plus2(num a, num b) => a + b;
 
 void main() {
-  sayHello1('Park'); // 'How are you Park' 출력
-  print(sayHello2('Lee')); // 'How are you Lee' 출력
-  print(sayHello3('Kim')); // 'How are you Kim' 출력
+  print(sayHello1('Lee', 'Park', 31, 'Suwon'));
+  // 'Hello Lee, I'm Park, 31 and from Suwon.' 출력
 
-  sayHello4('Kang'); // 'How are you Kang' 출력
-  print(sayHello5('Kweon')); // 'How are you Kweon' 출력
+  print(sayHello2(
+    myName: 'Park',
+    myAge: 31,
+    personName: 'Kim',
+  ));
+  // sayHello2 함수 호출시 매개변수 myCountry 의 값을 전달 안했지만 초기화된 값으로 반환됨
+  // 'Hello Kim, I'm Park, 31 and from Earth.' 출력
 
-  print(plus1(3, 4)); // 7 출력
-  print(plus2(-3.5, 4)); // 0.5 출력
+  print(sayHello3(
+    myName: 'Park',
+    myAge: 31,
+    myCountry: 'Suwon',
+    personName: 'Kang',
+  ));
+  // sayHello3 함수 호출시 매개변수 값 전달이 누락되면 Error 발생
+  // 'Hello Kang, I'm Park, 31 and from Suwon.' 출력
 }
