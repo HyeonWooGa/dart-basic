@@ -1,37 +1,44 @@
-// QQ Operator & QQ Equals(=QQ Assignment Operator)
+// Typedef
+//// 자료형이 헷갈릴 때 도움이 될 자료형 Alias(별명) 를 만드는 방법
+//// 기본적으로 typedef 를 TS 처럼 코드 최상단이나 Typedefs 파일에
+//// 한 눈에 보이게 사용하면 좋을 것 같습니다.
+//// 현재는 학습 중이므로 코드 중간중간에 사용했습니다.
 
-//// 함수 선언식
-String capitalizeName1(String? name) {
-  if (name != null) {
-    return name.toUpperCase();
-  }
-  return 'ANON';
+List<int> reverseListOfNumbers1(List<int> numbers) {
+  var reversed = numbers.reversed; // Iterable
+  return reversed.toList(); // List
 }
 
-//// 화살표 함수 + 삼항 연산자
-String capitalizeName2(String? name) =>
-    name != null ? name.toUpperCase() : 'ANON';
+typedef ListOfInts = List<int>; // ListOfInts == List<int>
 
-//// 화살표 함수 + QQ 연산자
-String capitalizeName3(String? name) => name?.toUpperCase() ?? 'ANON';
+ListOfInts reverseListOfNumbers2(ListOfInts numbers) =>
+    numbers.reversed.toList();
 
-//// QQ Equals
-String capitalizeName4(String? name) {
-  name ??= 'anon';
+typedef SetOfInts = Set<int>;
 
-  return name.toUpperCase();
+SetOfInts addFiveToSetOfNumbers(SetOfInts numbers) {
+  numbers.add(5);
+
+  return numbers;
 }
+
+typedef MapOfCouple = Map<String, String>;
+
+String introduceCouple(MapOfCouple couple) =>
+    '${couple['man']} and ${couple['woman']} are a very beautiful couple.';
 
 void main() {
-  print(capitalizeName1('Park')); // 'PARK' 출력
-  print(capitalizeName1(null)); // 'ANON' 출력
+  ListOfInts list = [1, 2, 3, 4];
+  SetOfInts set = {1, 2, 3, 4};
+  MapOfCouple map = {
+    'man': 'Park',
+    'woman': 'Lee',
+  };
 
-  print(capitalizeName2('Lee')); // 'LEE' 출력
-  print(capitalizeName2(null)); // 'ANON' 출력
+  print(reverseListOfNumbers1(list)); // [4,3,2,1] 출력
+  print(reverseListOfNumbers2(list)); // [4,3,2,1] 출력
 
-  print(capitalizeName3('Shin')); // 'SHIN' 출력
-  print(capitalizeName3(null)); // 'ANON' 출력
+  print(addFiveToSetOfNumbers(set)); // {1, 2, 3, 4, 5} 출력
 
-  print(capitalizeName4('Kang')); // 'KANG' 출력
-  print(capitalizeName4(null)); // 'ANON' 출력
+  print(introduceCouple(map)); // 'Park and Lee are a very beautiful couple.'
 }
