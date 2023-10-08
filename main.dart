@@ -1,35 +1,59 @@
-// First Dart Class (생성자 아직 사용 X)
-//// Class Property 정의 시에 자료형을 지정해줘야 한다.
+// Class Constructor
 
-////// Class 정의
-class Player {
+////// Class 정의 기초
+class Player1 {
   //Properties
-  String name = 'Lee';
-  final String id = 'ER23YT'; // Class 의 프로퍼티가 수정 불가능 (final 키워드)
-  int xp = 1500;
+  late String name;
+  late final String id;
+  late int xp;
+  // Dart 는 초기값이 없는 것을 못 버텨하기 때문에
+  // 생성자를 사용하여 인스턴스 생성 하고자 할때는
+  // late 키워드 사용
+  //// 변수 선언은 여기서 했지만, 값은 나중에 받아온다는 뜻
+  //// late 는 Class 에서 아주 유용하지만
+  //// 더 짧게 late 의 역할을 하게 코드 작성하는 방법도 있다.
 
-  //Method
+  //Constructor
+  Player1(String name, String id, int xp) {
+    this.name = name;
+    this.id = id;
+    this.xp = xp;
+  }
+
+  //Methods
   void sayHello() {
     print('Hello I\'m $name($id)');
-    // this.name 은 Mathod 내 변수 이름과
-    // Class 내 변수 이름이 겹치는 경우에만
-    // Class 내 변수를 호출하기 위해 사용
-    // 일반적으로 this.name 과 같이 Property 호출하는 것은 지양
+  }
+}
+
+//// Class 정의
+////// 생성자의 매개변수로 this.프로퍼티를 사용하여
+////// late 키워드나 생성자 내부 코드가 필요 없어졌다.
+////// 하지만 생성자 매개변수가 Positional Parameters
+////// 순서를 기억해야하는 단점이 있다.
+////// 다음에는 생성자 매개변수를 Named Parameters 로 사용하는 것을 학습
+class Player2 {
+  String name;
+  final String id;
+  int xp;
+
+  Player2(this.name, this.id, this.xp);
+
+  void sayHello() {
+    print('Hello I\'m $name($id)');
   }
 }
 
 void main() {
-  ////// 인스턴스 생성
-  var player = Player(); // var player = new Player(); new 는 생략 가능
-  print('Name: ${player.name}, Id: ${player.id}');
-  // 'Name: Lee, Id: ER23YT' 출력
+  var player1 = Player1('Park', 'yeonwoopark22', 1500);
+  var player2 = Player1('Lee', 'igh1482', 2000);
 
-  player.sayHello(); // 'Hello I'm Lee(ER23YT)' 출력
+  player1.sayHello();
+  player2.sayHello();
 
-  player.name = 'Park';
-  // player.id = 'ET87TY';   // Error 발생
-  print('Name: ${player.name}, Id: ${player.id}');
-  // 'Name: Park, Id: ER23YT' 출력
+  var player3 = Player2('Shin', 'jws60', 1500);
+  var player4 = Player2('Park', 'hsp55', 2000);
 
-  player.sayHello(); // 'Hello I'm Park(ER23YT)' 출력
+  player3.sayHello();
+  player4.sayHello();
 }
