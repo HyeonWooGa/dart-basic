@@ -18,8 +18,24 @@ String sayHello3(var name) {
   return 'How are you $name';
 }
 
+void sayHello4(String name) => print('How are you $name');
+
+String sayHello5(String name) => 'How are you $name';
+
+num plus1(num a, num b) {
+  return a + b;
+}
+
+num plus2(num a, num b) => a + b;
+
 void main() {
   sayHello1('Park'); // 'How are you Park' 출력
   print(sayHello2('Lee')); // 'How are you Lee' 출력
   print(sayHello3('Kim')); // 'How are you Kim' 출력
+
+  sayHello4('Kang'); // 'How are you Kang' 출력
+  print(sayHello5('Kweon')); // 'How are you Kweon' 출력
+
+  print(plus1(3, 4)); // 7 출력
+  print(plus2(-3.5, 4)); // 0.5 출력
 }
