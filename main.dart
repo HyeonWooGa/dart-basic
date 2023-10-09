@@ -1,55 +1,49 @@
-// Abstract Methods & Abstract Classes
-//// 추상 클래스로는 인스턴스를 생성할 수 없다.
-//// 추상 클래스는 다른 클래스들이 직접 구현해야하는 메소드들을 모아 놓은 일종의 청사진(Blueprint)
-////// 수많은 청사진에 메소드의 이름과 반환 타입, 매개변수만 정해서 정의할 수 있다.
-//// Flutter 를 사용할때 많이 사용하진 않아도 유용한 기능이긴 합니다.
+// Inheritance (상속)
+//// Flutter 에선 가끔 사용하지만 꼭 알아야하는 중요한 개념
+//// 자주 사용할 수도?
 
-abstract class Human {
-  void walk();
-}
+enum Team { red, blue }
 
-enum Team { Christians, NonChristians, Unknown }
-
-class Player extends Human {
+class Human {
+  final String name;
   int xp;
-  String name;
-  Team team;
-
-  Player({
+  Human({
     required this.name,
     required this.xp,
-    required this.team,
   });
-
   void sayHello() {
-    print('Hi my name is $name');
-  }
-
-  void walk() {
-    print('I\'m walking');
+    print('hi my name is $name');
   }
 }
 
-class Coach extends Human {
-  void walk() {
-    print('Coach\'s walking');
+//상속받는 클래스는 부모 클래스의 모든 것을 가지게 된다.
+class Player extends Human {
+  final Team team;
+
+  // OOP(객체 지향 프로그래밍 개념)
+  // super 키워드를 통해 부모 클래스와 상호작용할 수 있게 해준다.
+  // 여러가지 방법이 가능하다는 것을 보여주기 위해 super 키워드 두 군데서 사용
+  // 실제 코드 작성시에서는 한 군데에서 한 가지 방법으로만 통일성 있게 사용
+  Player({
+    required this.team,
+    required String name,
+    required super.xp,
+  }) : super(name: name);
+
+  // @override 키워드를 사용해 부모 클래스의 메소드를 덮어쓴다.
+  // super 키워드를 통해 부모 클래스의 메소드를 불러올 수 있다.
+  @override
+  void sayHello() {
+    super.sayHello();
+    print('and I play for $team');
   }
 }
 
 void main() {
-  //인스턴스 생성직후 Cascade Notation 사용
-  var park = Player(
+  var player = Player(
+    team: Team.red,
     name: 'Park',
     xp: 0,
-    team: Team.Christians,
-  )
-    ..name = 'PYW'
-    ..xp = 100
-    ..sayHello(); // 'Hi my name is PYW' 출력
-
-  //인스턴스 생성직후가 아닐때 Cascade Notation 사용
-  var temp = park
-    ..name = 'Park'
-    ..xp = 1000
-    ..sayHello(); // 'Hi my name is Park' 출력
+  );
+  player.sayHello();
 }
